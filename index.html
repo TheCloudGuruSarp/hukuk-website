@@ -65,6 +65,12 @@
             background-position: center;
         }
         
+        /* YENİ: SOLDAN GİRİŞ ANİMASYONU KEYFRAMES */
+        @keyframes fadeInMoveRight {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         /* ANİMASYON STİLLERİ */
         @keyframes fadeInMoveUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -94,6 +100,19 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* YENİ: FOTOĞRAF ANİMASYONU STİLİ (SOL BLOK) */
+        .photo-slide-in {
+             opacity: 0;
+             /* Başlangıçta 50px sola kaydır */
+             transform: translateX(-50px);
+             /* Normal scroll geçişinden farklı, soldan giriş animasyonu kullan */
+             transition: none !important; /* fade-in-section geçişini devre dışı bırak */
+        }
+        .fade-in-section.is-visible .photo-slide-in {
+             animation: fadeInMoveRight 0.8s ease-out forwards;
+        }
+
     </style>
 </head>
 <body class="text-gray-800">
@@ -119,12 +138,12 @@
                     <span class="font-bold sm:text-lg whitespace-nowrap">
                         Çelikel 
                         <span class="ampersand-style">&</span> 
-                        Arslan Partners
+                        Arslan Partners |
                     </span>
                     
                     <!-- 2. SATIR (ALT SATIRA GEÇTİ) -->
                     <span class="italic text-base font-normal text-gray-600 whitespace-nowrap">
-                        Hukuk 
+                         Hukuk 
                         <span class="ampersand-style">&</span> 
                         Danışmanlık
                     </span>
@@ -164,8 +183,9 @@
     <!-- Hakkımızda -->
     <section id="hakkimizda" class="py-20 fade-in-section">
         <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <img src="https://placehold.co/600x400/1A2A47/E0E0E0?text=Ofisimizden+Bir+Kare" alt="Hukuk Bürosu" class="rounded-lg shadow-xl w-full">
+            <!-- YENİ OFİS FOTOĞRAFI VE ANİMASYONU -->
+            <div class="photo-slide-in">
+                <img src="ofis.jpeg" alt="Hukuk Bürosu Ofis Görünümü" class="rounded-lg shadow-xl w-full">
             </div>
             <div>
                 <!-- HAKKIMIZDA BAŞLIK AMPERSANDI DÜZELTİLDİ -->
