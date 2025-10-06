@@ -101,20 +101,33 @@
     <!-- Header -->
     <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- LOGO YERLEŞİMİ VE ÖZEL AMPERSAND STİLİ (HEADER) -->
-            <a href="#anasayfa" class="text-xl font-bold text-navy flex items-center space-x-2">
-                <img src="logo.png" alt="Çelikel & Arslan Logo" class="h-8 w-auto"> 
+            <!-- LOGO VE BAŞLIK GRUBU -->
+            <!-- Metin sola hizalandı (items-start), logo büyütüldü. -->
+            <a href="#anasayfa" class="text-xl font-bold text-navy flex items-center space-x-3">
+                <!-- LOGO BÜYÜKLÜĞÜ H-14 -->
+                <img src="logo.png" alt="Çelikel & Arslan Logo" class="h-14 w-auto"> 
                 
-                <!-- MOBİL GÖRÜNÜR: KISA İSİM -->
+                <!-- MOBİL GÖRÜNÜR: KISA İSİM (DEĞİŞMEDİ) -->
                 <span class="inline sm:hidden">
                     Çelikel <span class="ampersand-style">&</span> Arslan
                 </span>
 
-                <!-- MASAÜSTÜ GÖRÜNÜR: UZUN İSİM -->
-                <span class="hidden sm:inline">
-                    Çelikel 
-                    <span class="ampersand-style">&</span> 
-                    Arslan Partners - Hukuk ve Danışmanlık
+                <!-- MASAÜSTÜ GÖRÜNÜR: KURUMSAL İKİ SATIRLI YAPI -->
+                <span class="hidden sm:inline flex flex-col items-start leading-tight -space-y-0.5">
+                    
+                    <!-- 1. SATIR -->
+                    <span class="font-bold sm:text-lg whitespace-nowrap">
+                        Çelikel 
+                        <span class="ampersand-style">&</span> 
+                        Arslan Partners
+                    </span>
+                    
+                    <!-- 2. SATIR (ALT SATIRA GEÇTİ) -->
+                    <span class="italic text-base font-normal text-gray-600 whitespace-nowrap">
+                        Hukuk 
+                        <span class="ampersand-style">&</span> 
+                        Danışmanlık
+                    </span>
                 </span> 
             </a>
             <nav class="hidden md:flex space-x-8 items-center text-sm">
