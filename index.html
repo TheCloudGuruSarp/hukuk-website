@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çelikel & Arslan Hukuk Bürosu | Modern Hukuki Çözümler</title>
+    <!-- SİTE BAŞLIĞI GÜNCELLENDİ -->
+    <title>ÇELİKEL & ARSLAN PARTNERS - Hukuk ve Danışmanlık</title>
     
     <!-- FAVICON EKLEME: Logo.png dosyasını favicon olarak kullanıyoruz. -->
     <link rel="icon" type="image/png" href="logo.png">
@@ -113,7 +114,6 @@
                 <a href="#hakkimizda" class="text-gray-600 hover:text-navy transition-colors">Hakkımızda</a>
                 <a href="#uzmanlik" class="text-gray-600 hover:text-navy transition-colors">Uzmanlık Alanları</a>
                 <a href="#ekibimiz" class="text-gray-600 hover:text-navy transition-colors">Ekibimiz</a>
-                <!-- MAKALELER LİNKİ KALDIRILDI -->
                 <a href="#iletisim" class="bg-navy text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-all">İletişime Geçin</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-navy text-2xl">
@@ -125,7 +125,6 @@
             <a href="#hakkimizda" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Hakkımızda</a>
             <a href="#uzmanlik" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Uzmanlık Alanları</a>
             <a href="#ekibimiz" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Ekibimiz</a>
-            <!-- MAKALELER LİNKİ KALDIRILDI -->
             <a href="#iletisim" class="block py-3 px-6 text-white bg-navy hover:bg-opacity-90">İletişime Geçin</a>
         </div>
     </header>
@@ -210,33 +209,38 @@
 
     <!-- Ekibimiz -->
     <section id="ekibimiz" class="py-20 fade-in-section">
-        <div class="container mx-auto px-6 text-center max-w-2xl">
+        <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold text-navy mb-12">Kurucu Avukatlarımız</h2>
             
-            <!-- TEK FOTOĞRAF ALAN BAŞLAT -->
-            <div class="bg-white p-8 rounded-lg shadow-xl mx-auto">
-                <!-- TEK FOTOĞRAF -->
-                <img src="https://placehold.co/600x300/e2e8f0/1A2A47?text=Kurucu+Ortaklar+Fotoğrafı" alt="Avukatlar Ece Leyla Arslan Taş ve Hande Çelikel Gül" class="w-full h-auto rounded-lg mx-auto mb-6 object-cover shadow-lg">
+            <!-- İKİ AYRI FOTOĞRAF VE BİLGİ ALANI -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center border-t border-silver-mid pt-6 mt-4">
-                    <!-- Avukat 1 Bilgisi -->
-                    <div>
-                        <h3 class="font-bold text-xl text-navy">Av. Ece Leyla Arslan Taş</h3>
-                        <p class="text-gray-700">Kurucu Ortak</p>
+                <!-- Avukat 1: Ece Leyla Arslan Taş -->
+                <div class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 text-center">
+                    <img src="leyla.jpeg" alt="Avukat Ece Leyla Arslan Taş" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-silver-mid/50">
+                    <h3 class="font-bold text-xl text-navy">Av. Ece Leyla Arslan Taş</h3>
+                    <p class="text-gray-700 mb-4">Kurucu Ortak</p>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <p><i class="fas fa-envelope mr-2 text-silver-mid"></i> eceleyla@celikelarslan.com</p>
+                        <p><i class="fas fa-phone mr-2 text-silver-mid"></i> 0535 326 55 65</p>
                     </div>
-                    <!-- Avukat 2 Bilgisi -->
-                    <div>
-                        <h3 class="font-bold text-xl text-navy">Av. Hande Çelikel Gül</h3>
-                        <p class="text-gray-700">Kurucu Ortak</p>
+                </div>
+
+                <!-- Avukat 2: Hande Çelikel Gül -->
+                <div class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 text-center">
+                    <img src="hande.jpeg" alt="Avukat Hande Çelikel Gül" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover shadow-lg border-4 border-silver-mid/50">
+                    <h3 class="font-bold text-xl text-navy">Av. Hande Çelikel Gül</h3>
+                    <p class="text-gray-700 mb-4">Kurucu Ortak</p>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <p><i class="fas fa-envelope mr-2 text-silver-mid"></i> hande@celikelarslan.com</p>
+                        <p><i class="fas fa-phone mr-2 text-silver-mid"></i> 0507 304 87 83</p>
                     </div>
                 </div>
             </div>
-            <!-- TEK FOTOĞRAF ALAN BİTİŞ -->
+            <!-- İKİ AYRI FOTOĞRAF VE BİLGİ ALANI BİTİŞ -->
             
         </div>
     </section>
-
-    <!-- MAKALELER BÖLÜMÜ TAMAMEN KALDIRILDI -->
 
     <!-- İletişim -->
     <section id="iletisim" class="py-20 bg-navy text-white fade-in-section">
