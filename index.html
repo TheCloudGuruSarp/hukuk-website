@@ -11,10 +11,13 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Lora (Serif) -->
+    <!-- GOOGLE FONTS: Playfair Display (Ana Font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- EK FONT: Inter - Ampersand (&) için daha ince, modern Sans-serif font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -22,9 +25,24 @@
     <style>
         /* Custom styles */
         body {
-            font-family: 'Lora', serif; /* Resmi bir görünüm için serif font */
+            /* FONT GÜNCELLENDİ: Playfair Display ana font olarak kalır */
+            font-family: 'Playfair Display', serif; /* Kartvizit şıklığına uygun Serif font */
             background-color: #f8f9fa; 
         }
+
+        /* Ampersand (&) stilini belirginleştirme: Artık Inter fontu kullanıyor */
+        .ampersand-style {
+            /* Inter, Calibri'ye yakın, modern ve okunaklı bir Sans-Serif'tir. */
+            font-family: 'Inter', sans-serif; 
+            font-style: normal; 
+            font-size: 1.1em; 
+            font-weight: 700; /* Kalınlık 700 olarak ayarlandı */
+            margin: 0 4px; 
+            line-height: 1; 
+            position: relative;
+            top: 0; 
+        }
+
 
         /* YENİ RENK PALETİ - LACİVERT & GÜMÜŞ GRİ */
         .text-navy { color: #1A2A47; }
@@ -45,6 +63,26 @@
             background-size: cover;
             background-position: center;
         }
+        
+        /* ANİMASYON STİLLERİ */
+        @keyframes fadeInMoveUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title-animation {
+            opacity: 0; /* Başlangıçta gizli */
+            animation: fadeInMoveUp 1s ease-out 0.3s forwards; /* 0.3s gecikmeyle başla */
+        }
+        .hero-subtitle-animation {
+            opacity: 0; 
+            animation: fadeInMoveUp 1s ease-out 0.6s forwards; /* 0.6s gecikmeyle başla */
+        }
+        .hero-button-animation {
+            opacity: 0; 
+            animation: fadeInMoveUp 1s ease-out 0.9s forwards; /* 0.9s gecikmeyle başla */
+        }
+
         /* Scroll animasyonları için başlangıç durumu */
         .fade-in-section {
             opacity: 0;
@@ -62,16 +100,20 @@
     <!-- Header -->
     <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- LOGO YERLEŞİMİ: Dosya adı "logo.png" kullanıldı. -->
+            <!-- LOGO YERLEŞİMİ VE ÖZEL AMPERSAND STİLİ (HEADER) -->
             <a href="#anasayfa" class="text-xl font-bold text-navy flex items-center space-x-2">
                 <img src="logo.png" alt="Çelikel & Arslan Logo" class="h-8 w-auto"> 
-                <span class="hidden sm:inline">Çelikel & Arslan Hukuk Bürosu</span> 
+                <span class="hidden sm:inline">
+                    Çelikel 
+                    <span class="ampersand-style">&</span> 
+                    Arslan Hukuk Bürosu
+                </span> 
             </a>
             <nav class="hidden md:flex space-x-8 items-center text-sm">
                 <a href="#hakkimizda" class="text-gray-600 hover:text-navy transition-colors">Hakkımızda</a>
                 <a href="#uzmanlik" class="text-gray-600 hover:text-navy transition-colors">Uzmanlık Alanları</a>
                 <a href="#ekibimiz" class="text-gray-600 hover:text-navy transition-colors">Ekibimiz</a>
-                <a href="#makaleler" class="text-gray-600 hover:text-navy transition-colors">Makaleler</a>
+                <!-- MAKALELER LİNKİ KALDIRILDI -->
                 <a href="#iletisim" class="bg-navy text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-all">İletişime Geçin</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-navy text-2xl">
@@ -83,7 +125,7 @@
             <a href="#hakkimizda" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Hakkımızda</a>
             <a href="#uzmanlik" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Uzmanlık Alanları</a>
             <a href="#ekibimiz" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Ekibimiz</a>
-            <a href="#makaleler" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Makaleler</a>
+            <!-- MAKALELER LİNKİ KALDIRILDI -->
             <a href="#iletisim" class="block py-3 px-6 text-white bg-navy hover:bg-opacity-90">İletişime Geçin</a>
         </div>
     </header>
@@ -91,9 +133,12 @@
     <!-- Ana Sayfa (Hero) -->
     <section id="anasayfa" class="min-h-screen flex items-center justify-center hero-bg text-white text-center">
         <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">Hukuki İhtiyaçlarınız İçin <br> Güvenilir Çözümler</h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">Müvekkillerimize özel, sonuç odaklı ve modern hukuki çözümlerle adaletin hizmetindeyiz.</p>
-            <a href="#uzmanlik" class="bg-silver-light text-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105">Hizmetlerimizi Keşfedin</a>
+            <!-- BAŞLIK ANİMASYONU EKLENDİ -->
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 hero-title-animation">Hukuki İhtiyaçlarınız İçin <br> Güvenilir Çözümler</h1>
+            <!-- ALT BAŞLIK ANİMASYONU EKLENDİ -->
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto hero-subtitle-animation">Müvekkillerimize özel, sonuç odaklı ve modern hukuki çözümlerle adaletin hizmetindeyiz.</p>
+            <!-- BUTON ANİMASYONU EKLENDİ -->
+            <a href="#uzmanlik" class="bg-silver-light text-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 hero-button-animation">Hizmetlerimizi Keşfedin</a>
         </div>
     </section>
 
@@ -104,9 +149,11 @@
                 <img src="https://placehold.co/600x400/1A2A47/E0E0E0?text=Ofisimizden+Bir+Kare" alt="Hukuk Bürosu" class="rounded-lg shadow-xl w-full">
             </div>
             <div>
-                <h2 class="text-3xl font-bold text-navy mb-4">Felsefemiz & Yaklaşımımız</h2>
+                <!-- HAKKIMIZDA BAŞLIK AMPERSANDI DÜZELTİLDİ -->
+                <h2 class="text-3xl font-bold text-navy mb-4">Felsefemiz <span class="ampersand-style">&</span> Yaklaşımımız</h2>
+                
                 <p class="text-gray-600 mb-4 leading-relaxed">
-                    Çelikel & Arslan Hukuk Bürosu olarak temel felsefemiz, müvekkillerimizin haklarını en üst düzeyde korumak ve onlara şeffaf, dürüst ve etkili bir hukuki danışmanlık hizmeti sunmaktır. Hukukun karmaşık dünyasında, modern teknolojiyi ve yenilikçi bakış açılarını kullanarak en doğru stratejileri geliştiriyoruz. 
+                    Çelikel <span class="ampersand-style">&</span> Arslan Hukuk Bürosu olarak temel felsefemiz, müvekkillerimizin haklarını en üst düzeyde korumak ve onlara şeffaf, dürüst ve etkili bir hukuki danışmanlık hizmeti sunmaktır. Hukukun karmaşık dünyasında, modern teknolojiyi ve yenilikçi bakış açılarını kullanarak en doğru stratejileri geliştiriyoruz. 
                 </p>
                 <p class="text-gray-600 leading-relaxed">
                     Her davayı kendi özelinde değerlendirir, müvekkillerimizle yakın bir iletişim kurarak sürecin her aşamasında onları bilgilendiririz. Güven ve gizlilik, çalışma prensiplerimizin temelini oluşturur.
@@ -163,60 +210,33 @@
 
     <!-- Ekibimiz -->
     <section id="ekibimiz" class="py-20 fade-in-section">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-6 text-center max-w-2xl">
             <h2 class="text-3xl font-bold text-navy mb-12">Kurucu Avukatlarımız</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                    <!-- Ekip Üyesi 1 -->
-                <div class="text-center">
-                    <img src="https://placehold.co/300x300/e2e8f0/1A2A47?text=Avukat+Fotoğrafı" alt="Avukat Ece Leyla Arslan Taş" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover shadow-lg">
-                    <h3 class="font-bold text-xl text-navy">Av. Ece Leyla Arslan Taş</h3>
-                    <p class="text-gray-700">Kurucu Ortak</p>
-                </div>
-                    <!-- Ekip Üyesi 2 -->
-                <div class="text-center">
-                    <img src="https://placehold.co/300x300/e2e8f0/1A2A47?text=Avukat+Fotoğrafı" alt="Avukat Hande Çelikel Gül" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover shadow-lg">
-                    <h3 class="font-bold text-xl text-navy">Av. Hande Çelikel Gül</h3>
-                    <p class="text-gray-700">Kurucu Ortak</p>
+            
+            <!-- TEK FOTOĞRAF ALAN BAŞLAT -->
+            <div class="bg-white p-8 rounded-lg shadow-xl mx-auto">
+                <!-- TEK FOTOĞRAF -->
+                <img src="https://placehold.co/600x300/e2e8f0/1A2A47?text=Kurucu+Ortaklar+Fotoğrafı" alt="Avukatlar Ece Leyla Arslan Taş ve Hande Çelikel Gül" class="w-full h-auto rounded-lg mx-auto mb-6 object-cover shadow-lg">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center border-t border-silver-mid pt-6 mt-4">
+                    <!-- Avukat 1 Bilgisi -->
+                    <div>
+                        <h3 class="font-bold text-xl text-navy">Av. Ece Leyla Arslan Taş</h3>
+                        <p class="text-gray-700">Kurucu Ortak</p>
+                    </div>
+                    <!-- Avukat 2 Bilgisi -->
+                    <div>
+                        <h3 class="font-bold text-xl text-navy">Av. Hande Çelikel Gül</h3>
+                        <p class="text-gray-700">Kurucu Ortak</p>
+                    </div>
                 </div>
             </div>
+            <!-- TEK FOTOĞRAF ALAN BİTİŞ -->
+            
         </div>
     </section>
 
-    <!-- Makaleler -->
-    <section id="makaleler" class="py-20 bg-white fade-in-section">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-navy mb-12 text-center">Güncel Makaleler</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Makale 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <img src="https://placehold.co/600x400/1A2A47/E0E0E0?text=Hukuk" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <p class="text-sm text-silver-dark mb-2">Kişisel Veriler</p>
-                        <h3 class="font-bold text-lg text-navy mb-3">KVKK Kapsamında Şirketlerin Yükümlülükleri</h3>
-                        <a href="#" class="font-semibold text-gray-700 hover:text-navy transition">Devamını Oku →</a>
-                    </div>
-                </div>
-                <!-- Makale 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <img src="https://placehold.co/600x400/1A2A47/E0E0E0?text=Teknoloji" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <p class="text-sm text-silver-dark mb-2">E-Ticaret</p>
-                        <h3 class="font-bold text-lg text-navy mb-3">E-Ticaret Siteleri İçin Hukuki Gereklilikler</h3>
-                        <a href="#" class="font-semibold text-gray-700 hover:text-navy transition">Devamını Oku →</a>
-                    </div>
-                </div>
-                <!-- Makale 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                    <img src="https://placehold.co/600x400/1A2A47/E0E0E0?text=Adalet" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <p class="text-sm text-silver-dark mb-2">İş Hukuku</p>
-                        <h3 class="font-bold text-lg text-navy mb-3">İşverenler İçin Mobbing'in Hukuki Sonuçları</h3>
-                        <a href="#" class="font-semibold text-gray-700 hover:text-navy transition">Devamını Oku →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- MAKALELER BÖLÜMÜ TAMAMEN KALDIRILDI -->
 
     <!-- İletişim -->
     <section id="iletisim" class="py-20 bg-navy text-white fade-in-section">
@@ -225,7 +245,12 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- İletişim Bilgileri ve Harita -->
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-silver-light">Çelikel & Arslan Hukuk Bürosu</h3>
+                    <!-- BAŞLIK AMPERSANDI GÜNCELLENDİ (İLETİŞİM) -->
+                    <h3 class="text-xl font-bold mb-4 text-silver-light">
+                        Çelikel 
+                        <span class="ampersand-style">&</span> 
+                        Arslan Hukuk Bürosu
+                    </h3>
                     <p class="mb-4 text-gray-300">Hukuki sorunlarınızla ilgili danışmanlık almak veya randevu oluşturmak için aşağıdaki formu doldurabilir veya bilgilerimizden bize ulaşabilirsiniz.</p>
                     <div class="space-y-4">
                         <p class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-silver-mid"></i><span>Çınarlı Mah. Ankara Asfaltı Cad. No:15/391 Mistral Plaza Konak/İZMİR</span></p>
@@ -233,7 +258,7 @@
                         <p class="flex items-center"><i class="fas fa-envelope w-6 text-silver-mid"></i><span>eceleyla@celikelarslan.com</span></p>
                     </div>
                     <div class="mt-8 rounded-lg overflow-hidden">
-                        <!-- HARİTA KODU GÜNCELLENDİ: Sizin verdiğiniz iframe kodu kullanıldı. -->
+                        <!-- HARİTA KODU KORUNDU -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4060.5081700480273!2d27.178662300000003!3d38.4479426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b962a6741b7aff%3A0xe023d11d2c0cb05a!2sMistral%20%C4%B0zmir!5e1!3m2!1sen!2str!4v1759756505095!5m2!1sen!2str" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -264,7 +289,8 @@
     <!-- Footer -->
     <footer class="bg-white py-8">
         <div class="container mx-auto px-6 text-center text-gray-600">
-            <p>© 2024 Çelikel & Arslan Hukuk Bürosu. Tüm hakları saklıdır.</p>
+            <!-- FOOTER AMPERSANDI GÜNCELLENDİ -->
+            <p>© 2024 Çelikel <span class="ampersand-style">&</span> Arslan Hukuk Bürosu. Tüm hakları saklıdır.</p>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="#" class="hover:text-navy transition-colors"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" class="hover:text-navy transition-colors"><i class="fab fa-twitter"></i></a>
