@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
-    <!-- EK FONT: Inter - Ampersand (&) için daha ince, modern Sans-serif font -->
+    <!-- EK FONT: Inter - Ampersand (&) yerine normal metin kullanılacağı için Inter kaldırıldı, ancak modern görünüm için geçici olarak tutuldu -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
@@ -31,19 +31,13 @@
             background-color: #f8f9fa; 
         }
 
-        /* Ampersand (&) stilini belirginleştirme: Artık Inter fontu kullanıyor */
+        /* Ampersand (&) stili, artık "ve" kelimesi kullanıldığı için standart fonta döndürüldü */
         .ampersand-style {
-            /* Inter, Calibri'ye yakın, modern ve okunaklı bir Sans-Serif'tir. */
-            font-family: 'Inter', sans-serif; 
-            font-style: normal; 
-            font-size: 1.1em; 
-            font-weight: 700; /* Kalınlık 700 olarak ayarlandı */
-            margin: 0 4px; 
-            line-height: 1; 
-            position: relative;
-            top: 0; 
+            /* Stil kaldırıldı, sadece normal boşluk sağlamak için kullanılıyor */
+            font-style: normal;
+            font-weight: 700;
+            margin: 0 4px;
         }
-
 
         /* YENİ RENK PALETİ - LACİVERT & GÜMÜŞ GRİ */
         .text-navy { color: #1A2A47; }
@@ -101,17 +95,8 @@
             transform: translateY(0);
         }
 
-        /* YENİ: FOTOĞRAF ANİMASYONU STİLİ (SOL BLOK) */
-        .photo-slide-in {
-             opacity: 0;
-             /* Başlangıçta 50px sola kaydır */
-             transform: translateX(-50px);
-             /* Normal scroll geçişinden farklı, soldan giriş animasyonu kullan */
-             transition: none !important; /* fade-in-section geçişini devre dışı bırak */
-        }
-        .fade-in-section.is-visible .photo-slide-in {
-             animation: fadeInMoveRight 0.8s ease-out forwards;
-        }
+        /* FOTOĞRAF ANİMASYONU STİLİ KALDIRILDI */
+        /* Hakkımızda bölümünden görsel kaldırıldığı için ilgili stiller temizlendi. */
 
     </style>
 </head>
@@ -121,31 +106,26 @@
     <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- LOGO VE BAŞLIK GRUBU -->
-            <!-- Metin sola hizalandı (items-start), logo büyütüldü. -->
             <a href="#anasayfa" class="text-xl font-bold text-navy flex items-center space-x-3">
                 <!-- LOGO BÜYÜKLÜĞÜ H-14 -->
-                <img src="logo.png" alt="Çelikel & Arslan Logo" class="h-14 w-auto"> 
+                <img src="logo.png" alt="ÇELİKEL VE ARSLAN Logo" class="h-14 w-auto"> 
                 
-                <!-- MOBİL GÖRÜNÜR: KISA İSİM (DEĞİŞMEDİ) -->
-                <span class="inline sm:hidden">
-                    Çelikel <span class="ampersand-style">&</span> Arslan
+                <!-- MOBİL GÖRÜNÜR: KISA İSİM -->
+                <span class="inline sm:hidden uppercase">
+                    ÇELİKEL VE ARSLAN
                 </span>
 
                 <!-- MASAÜSTÜ GÖRÜNÜR: KURUMSAL İKİ SATIRLI YAPI -->
                 <span class="hidden sm:inline flex flex-col items-start leading-tight -space-y-0.5">
                     
                     <!-- 1. SATIR -->
-                    <span class="font-bold sm:text-lg whitespace-nowrap">
-                        Çelikel 
-                        <span class="ampersand-style">&</span> 
-                        Arslan Partners |
+                    <span class="font-bold sm:text-lg whitespace-nowrap uppercase">
+                        ÇELİKEL VE ARSLAN PARTNERS
                     </span>
                     
                     <!-- 2. SATIR (ALT SATIRA GEÇTİ) -->
                     <span class="italic text-base font-normal text-gray-600 whitespace-nowrap">
-                         Hukuk 
-                        <span class="ampersand-style">&</span> 
-                        Danışmanlık
+                        Hukuk ve Danışmanlık
                     </span>
                 </span> 
             </a>
@@ -153,6 +133,8 @@
                 <a href="#hakkimizda" class="text-gray-600 hover:text-navy transition-colors">Hakkımızda</a>
                 <a href="#uzmanlik" class="text-gray-600 hover:text-navy transition-colors">Uzmanlık Alanları</a>
                 <a href="#ekibimiz" class="text-gray-600 hover:text-navy transition-colors">Ekibimiz</a>
+                <!-- YENİ KVKK LİNKİ -->
+                <a href="#kvkk" class="text-gray-600 hover:text-navy transition-colors">KVKK</a>
                 <a href="#iletisim" class="bg-navy text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-all">İletişime Geçin</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-navy text-2xl">
@@ -164,6 +146,7 @@
             <a href="#hakkimizda" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Hakkımızda</a>
             <a href="#uzmanlik" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Uzmanlık Alanları</a>
             <a href="#ekibimiz" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">Ekibimiz</a>
+            <a href="#kvkk" class="block py-2 px-6 text-gray-600 hover:bg-gray-100">KVKK</a>
             <a href="#iletisim" class="block py-3 px-6 text-white bg-navy hover:bg-opacity-90">İletişime Geçin</a>
         </div>
     </header>
@@ -180,22 +163,21 @@
         </div>
     </section>
 
-    <!-- Hakkımızda -->
+    <!-- Hakkımızda (MİSYON VE VİZYON) -->
     <section id="hakkimizda" class="py-20 fade-in-section">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <!-- YENİ OFİS FOTOĞRAFI VE ANİMASYONU -->
-            <div class="photo-slide-in">
-                <img src="ofis.jpeg" alt="Hukuk Bürosu Ofis Görünümü" class="rounded-lg shadow-xl w-full">
-            </div>
+        <!-- Misyon ve Vizyon metni, sayfa ortasında ve maksimum 4xl genişliğinde olacak. -->
+        <div class="container mx-auto px-6 max-w-4xl">
+            <!-- BAŞLIK GÜNCELLENDİ -->
+            <h2 class="text-3xl font-bold text-navy mb-12 text-center">Misyonumuz <span class="ampersand-style">ve</span> Vizyonumuz</h2>
+            
             <div>
-                <!-- HAKKIMIZDA BAŞLIK AMPERSANDI DÜZELTİLDİ -->
-                <h2 class="text-3xl font-bold text-navy mb-4">Felsefemiz <span class="ampersand-style">&</span> Yaklaşımımız</h2>
-                
-                <p class="text-gray-600 mb-4 leading-relaxed">
-                    Çelikel <span class="ampersand-style">&</span> Arslan Hukuk Bürosu olarak temel felsefemiz, müvekkillerimizin haklarını en üst düzeyde korumak ve onlara şeffaf, dürüst ve etkili bir hukuki danışmanlık hizmeti sunmaktır. Hukukun karmaşık dünyasında, modern teknolojiyi ve yenilikçi bakış açılarını kullanarak en doğru stratejileri geliştiriyoruz. 
+                <h3 class="font-bold text-xl text-navy mb-2">Misyonumuz</h3>
+                <p class="text-gray-600 mb-8 leading-relaxed border-b pb-8 border-silver-mid">
+                    Müvekkillerimizin hukuki haklarını en üst düzeyde korumak, onlara şeffaf ve dürüst hizmet sunmak, karmaşık hukuki süreçlerde güvenilir ve sonuç odaklı çözümler geliştirmektir. Hukukun üstünlüğüne olan inancımızla, yenilikçi yaklaşımları benimseyerek adaletin tecelli etmesine katkıda bulunmak misyonumuzun temelini oluşturur.
                 </p>
+                <h3 class="font-bold text-xl text-navy mb-2">Vizyonumuz</h3>
                 <p class="text-gray-600 leading-relaxed">
-                    Her davayı kendi özelinde değerlendirir, müvekkillerimizle yakın bir iletişim kurarak sürecin her aşamasında onları bilgilendiririz. Güven ve gizlilik, çalışma prensiplerimizin temelini oluşturur.
+                    Türkiye genelinde tanınan, uzmanlık alanlarında öncü ve etik değerlere bağlı bir hukuk ofisi olmaktır. Sektördeki dijital dönüşüme liderlik ederek, müvekkil memnuniyetini ve hukuki başarıyı sürekli kılmayı hedefliyoruz.
                 </p>
             </div>
         </div>
@@ -207,41 +189,41 @@
             <h2 class="text-3xl font-bold text-navy mb-2">Uzmanlık Alanlarımız</h2>
             <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Geniş bir yelpazede sunduğumuz hukuki hizmetlerle yanınızdayız.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                <!-- Alan 1 -->
+                <!-- Alan 1: Ceza Hukuku (KORUNDU) -->
                 <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
                     <i class="fas fa-gavel text-silver-dark text-3xl mb-4"></i>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Ceza Hukuku</h3>
                     <p class="text-gray-600">Soruşturma ve kovuşturma aşamalarında şüpheli/sanık müdafiiliği ve müşteki/katılan vekilliği hizmetleri.</p>
                 </div>
-                <!-- Alan 2 -->
+                <!-- Alan 2: Aile Hukuku (KORUNDU) -->
                 <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
                     <i class="fas fa-users text-silver-dark text-3xl mb-4"></i>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Aile Hukuku</h3>
                     <p class="text-gray-600">Anlaşmalı ve çekişmeli boşanma davaları, mal rejimi, velayet ve nafaka konularında danışmanlık.</p>
                 </div>
-                <!-- Alan 3 -->
+                <!-- Alan 3: İş Hukuku (YENİ/GÜNCELLENDİ) -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-hard-hat text-silver-dark text-3xl mb-4"></i>
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">İş Hukuku</h3>
+                    <p class="text-gray-600">İş sözleşmeleri, kıdem/ihbar tazminat davaları, iş kazaları ve İş Kanunu'ndan doğan uyuşmazlıklarda danışmanlık.</p>
+                </div>
+                <!-- Alan 4: Sigorta Hukuku (YENİ) -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-umbrella-beach text-silver-dark text-3xl mb-4"></i>
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Sigorta Hukuku</h3>
+                    <p class="text-gray-600">Sigorta tahkim ve dava süreçleri, trafik kazalarından doğan maddi ve manevi tazminat talepleri.</p>
+                </div>
+                <!-- Alan 5: Ticaret Hukuku (ÖNCEKİ ALAN 3 İDİ) -->
                 <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
                     <i class="fas fa-briefcase text-silver-dark text-3xl mb-4"></i>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Ticaret Hukuku</h3>
                     <p class="text-gray-600">Şirketler hukuku, sözleşmeler, haksız rekabet ve ticari davalarda profesyonel destek.</p>
                 </div>
-                <!-- Alan 4 -->
+                <!-- Alan 6: Bilişim Hukuku (ÖNCEKİ ALAN 4 İDİ) -->
                 <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
                     <i class="fas fa-laptop-code text-silver-dark text-3xl mb-4"></i>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Bilişim Hukuku</h3>
                     <p class="text-gray-600">Kişisel verilerin korunması (KVKK), e-ticaret, siber suçlar ve bilişim sözleşmeleri danışmanlığı.</p>
-                </div>
-                <!-- Alan 5 -->
-                <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
-                    <i class="fas fa-file-signature text-silver-dark text-3xl mb-4"></i>
-                    <h3 class="font-bold text-xl text-gray-800 mb-2">İcra ve İflas Hukuku</h3>
-                    <p class="text-gray-600">Alacak tahsili, icra takipleri, iflas ve konkordato süreçlerinde etkin hukuki çözümler.</p>
-                </div>
-                <!-- Alan 6 -->
-                <div class="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
-                    <i class="fas fa-landmark text-silver-dark text-3xl mb-4"></i>
-                    <h3 class="font-bold text-xl text-gray-800 mb-2">Gayrimenkul Hukuku</h3>
-                    <p class="text-gray-600">Tapu işlemleri, kira sözleşmeleri, kamulaştırma ve gayrimenkul alım-satım danışmanlığı.</p>
                 </div>
             </div>
         </div>
@@ -281,6 +263,32 @@
             
         </div>
     </section>
+    
+    <!-- KVKK AYDINLATMA METNİ -->
+    <section id="kvkk" class="py-20 bg-gray-50 fade-in-section">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl font-bold text-navy mb-6 text-center">Kişisel Verilerin Korunması (KVKK)</h2>
+            <h3 class="font-bold text-xl text-gray-800 mb-4">Aydınlatma Metni</h3>
+            <div class="text-gray-600 space-y-4 text-sm leading-relaxed border-t border-b border-silver-mid py-6">
+                <p>
+                    <strong>1. Veri Sorumlusu:</strong> ÇELİKEL VE ARSLAN PARTNERS Hukuk ve Danışmanlık (Bundan böyle "Büro" olarak anılacaktır) olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, kişisel verilerinizi Kanun'a ve ilgili mevzuata uygun olarak işlemekte ve korumaktayız.
+                </p>
+                <p>
+                    <strong>2. İşlenen Kişisel Verileriniz:</strong> Büro, hukuki hizmetler kapsamında ad, soyad, T.C. kimlik numarası, adres, telefon numarası, e-posta adresi, hukuki uyuşmazlıklara ilişkin bilgiler ve diğer gerekli verileri işlemektedir.
+                </p>
+                <p>
+                    <strong>3. İşleme Amaçları:</strong> Kişisel verileriniz, müvekkil ilişkilerinin kurulması ve sürdürülmesi, hukuki danışmanlık ve vekillik hizmetlerinin sunulması, yasal yükümlülüklerin yerine getirilmesi, iletişim faaliyetlerinin yürütülmesi ve bilgi güvenliğinin sağlanması amacıyla işlenmektedir.
+                </p>
+                <p>
+                    <strong>4. Aktarım:</strong> Kişisel verileriniz, hukuki zorunluluklar çerçevesinde yargı mercileri, resmi kurum ve kuruluşlar ile hizmet aldığımız iş ortaklarımıza (muhasebe, IT vb.) aktarılabilir.
+                </p>
+                <p>
+                    <strong>5. Haklarınız:</strong> KVKK’nın 11. maddesi uyarınca, kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini isteme ve silinmesini talep etme haklarına sahipsiniz.
+                </p>
+            </div>
+            <p class="text-center text-sm text-gray-700 mt-6">Detaylı bilgi ve başvuru için lütfen bizimle iletişime geçiniz.</p>
+        </div>
+    </section>
 
     <!-- İletişim -->
     <section id="iletisim" class="py-20 bg-navy text-white fade-in-section">
@@ -289,11 +297,11 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- İletişim Bilgileri ve Harita -->
                 <div>
-                    <!-- BAŞLIK AMPERSANDI GÜNCELLENDİ (İLETİŞİM) -->
+                    <!-- BAŞLIK GÜNCELLENDİ (İLETİŞİM) -->
                     <h3 class="text-xl font-bold mb-4 text-silver-light">
-                        Çelikel 
-                        <span class="ampersand-style">&</span> 
-                        Arslan Hukuk Bürosu
+                        ÇELİKEL 
+                        <span class="ampersand-style">VE</span> 
+                        ARSLAN PARTNERS
                     </h3>
                     <p class="mb-4 text-gray-300">Hukuki sorunlarınızla ilgili danışmanlık almak veya randevu oluşturmak için aşağıdaki formu doldurabilir veya bilgilerimizden bize ulaşabilirsiniz.</p>
                     <div class="space-y-4">
@@ -332,8 +340,8 @@
     <!-- Footer -->
     <footer class="bg-white py-8">
         <div class="container mx-auto px-6 text-center text-gray-600">
-            <!-- FOOTER AMPERSANDI GÜNCELLENDİ -->
-            <p>© 2024 Çelikel <span class="ampersand-style">&</span> Arslan Hukuk Bürosu. Tüm hakları saklıdır.</p>
+            <!-- FOOTER GÜNCELLENDİ (Partners ve "ve" kelimesi) -->
+            <p>© 2024 ÇELİKEL VE ARSLAN PARTNERS Hukuk ve Danışmanlık. Tüm hakları saklıdır.</p>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="#" class="hover:text-navy transition-colors"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" class="hover:text-navy transition-colors"><i class="fab fa-twitter"></i></a>
