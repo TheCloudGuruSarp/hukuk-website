@@ -96,6 +96,11 @@
 
         /* FOTOĞRAF ANİMASYONU STİLİ KALDIRILDI */
         /* Hakkımızda bölümünden görsel kaldırıldığı için ilgili stiller temizlendi. */
+        
+        /* YENİ MODAL STİLLERİ */
+        .modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
 
     </style>
 </head>
@@ -314,12 +319,13 @@
                 </div>
                 <!-- İletişim Formu: Netlify Forms ve alıcı e-postaları eklendi -->
                 <form 
+                    id="contact-form"
                     name="contact" 
                     method="POST" 
                     data-netlify="true" 
                     data-netlify-recipients="eceleyla@celikelarslan.com, hande@celikelarslan.com"
                     netlify-honeypot="bot-field"
-                    action="/success"
+                    
                 >
                     <!-- Netlify'ın formu tanıması için zorunlu gizli alan -->
                     <input type="hidden" name="form-name" value="contact">
@@ -347,11 +353,29 @@
                         <label for="message" class="block mb-2 font-medium">Mesajınız</label>
                         <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 bg-white/10 rounded-md border border-silver-mid focus:outline-none focus:ring-2 ring-silver-mid text-white"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-silver-light text-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105">Mesajı Gönder</button>
+                    <!-- Butona loading state eklendi -->
+                    <button id="submit-button" type="submit" class="w-full bg-silver-light text-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105">Mesajı Gönder</button>
+                    <!-- Hata mesajı alanı -->
+                    <p id="error-message" class="text-red-400 mt-2 hidden">Mesajınız gönderilemedi. Lütfen tekrar deneyin.</p>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- BAŞARI MODALI (POP-UP) -->
+    <div id="success-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white p-8 md:p-10 rounded-xl shadow-2xl max-w-md w-11/12 transform transition-all duration-300 scale-95 md:scale-100">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-navy text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-navy mb-3">İletildi!</h3>
+                <p class="text-gray-700 mb-6">E-postanız başarıyla iletilmiştir. Bizi tercih ettiğiniz için teşekkür ederiz.</p>
+                <button onclick="document.getElementById('success-modal').classList.remove('opacity-100', 'visible'); document.getElementById('success-modal').classList.add('opacity-0', 'invisible');"
+                        class="bg-navy text-white px-6 py-2 rounded-lg font-medium hover:bg-opacity-90 transition-colors">
+                    Tamam
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-white py-8">
@@ -407,6 +431,84 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // ==========================================================
+        // YENİ FORM GÖNDERİM VE MODAL KONTROL İŞLEVSELLİĞİ
+        // ==========================================================
+        const contactForm = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const successModal = document.getElementById('success-modal');
+        const errorMessage = document.getElementById('error-message');
+
+        // FormData'yı URL kodlu bir string'e dönüştüren yardımcı fonksiyon
+        const encode = (data) => {
+            return Object.keys(data)
+                .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+                .join("&");
+        }
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Butonu devre dışı bırak ve yükleniyor göster
+            submitButton.textContent = 'Gönderiliyor...';
+            submitButton.disabled = true;
+            errorMessage.classList.add('hidden');
+
+            const data = new FormData(contactForm);
+            
+            // Netlify, fetch API kullanılarak gönderilen formları tanımak için 
+            // gizli `form-name` alanının FormData'da bulunmasını ister.
+            const payload = {
+                'form-name': 'contact' // Gizli alanın değerini ekle
+            };
+            
+            // FormData'yı normal objeye dönüştür ve payload'a ekle
+            for (let pair of data.entries()) {
+                payload[pair[0]] = pair[1];
+            }
+
+            // Form verisini Netlify'a gönder (Same-page AJAX submission)
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: encode(payload)
+            })
+            .then(response => {
+                // Netlify başarılı form gönderiminde 200 veya 302 döndürür.
+                if (response.ok || response.status === 200) {
+                    // Başarılı: Modalı göster
+                    successModal.classList.remove('opacity-0', 'invisible');
+                    successModal.classList.add('opacity-100', 'visible');
+                    
+                    // Formu temizle
+                    contactForm.reset();
+                } else {
+                    // Hata: Hata mesajını göster
+                    errorMessage.classList.remove('hidden');
+                    console.error('Netlify Form Submission Failed:', response);
+                }
+            })
+            .catch(error => {
+                // Ağ veya diğer hatalar
+                errorMessage.classList.remove('hidden');
+                console.error('Submission Error:', error);
+            })
+            .finally(() => {
+                // İşlem bitince butonu sıfırla
+                submitButton.textContent = 'Mesajı Gönder';
+                submitButton.disabled = false;
+            });
+        });
+        
+        // Modalı tıklayarak kapatma işlevi (dışına tıklama)
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.remove('opacity-100', 'visible');
+                successModal.classList.add('opacity-0', 'invisible');
+            }
+        });
+
     </script>
 </body>
 </html>
