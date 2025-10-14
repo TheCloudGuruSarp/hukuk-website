@@ -93,15 +93,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* FOTOĞRAF ANİMASYONU STİLİ KALDIRILDI */
-        /* Hakkımızda bölümünden görsel kaldırıldığı için ilgili stiller temizlendi. */
-        
-        /* YENİ MODAL STİLLERİ */
-        .modal {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-
     </style>
 </head>
 <body class="text-gray-800">
@@ -327,10 +318,8 @@
                     netlify-honeypot="bot-field"
                     
                 >
-                    <!-- Netlify'ın formu tanıması için zorunlu gizli alan -->
+                    <!-- Netlify'ın formu tanıması için zorunlu gizli alanlar (Hem HTML hem JS'e koymak en güvenlisidir) -->
                     <input type="hidden" name="form-name" value="contact">
-                    
-                    <!-- Bot tuzak alanı (görünmez) -->
                     <p class="hidden">
                         <label>
                             Beni doldurmayın: <input name="bot-field" />
@@ -355,27 +344,15 @@
                     </div>
                     <!-- Butona loading state eklendi -->
                     <button id="submit-button" type="submit" class="w-full bg-silver-light text-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105">Mesajı Gönder</button>
-                    <!-- Hata mesajı alanı -->
-                    <p id="error-message" class="text-red-400 mt-2 hidden">Mesajınız gönderilemedi. Lütfen tekrar deneyin.</p>
+                    <!-- Durum mesajı alanı (Başarı veya hata burada gösterilecek) -->
+                    <p id="status-message" class="text-white mt-2 font-medium hidden text-center"></p>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- BAŞARI MODALI (POP-UP) -->
-    <div id="success-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center opacity-0 invisible">
-        <div class="bg-white p-8 md:p-10 rounded-xl shadow-2xl max-w-md w-11/12 transform transition-all duration-300 scale-95 md:scale-100">
-            <div class="text-center">
-                <i class="fas fa-check-circle text-navy text-5xl mb-4"></i>
-                <h3 class="text-2xl font-bold text-navy mb-3">İletildi!</h3>
-                <p class="text-gray-700 mb-6">E-postanız başarıyla iletilmiştir. Bizi tercih ettiğiniz için teşekkür ederiz.</p>
-                <button onclick="document.getElementById('success-modal').classList.remove('opacity-100', 'visible'); document.getElementById('success-modal').classList.add('opacity-0', 'invisible');"
-                        class="bg-navy text-white px-6 py-2 rounded-lg font-medium hover:bg-opacity-90 transition-colors">
-                    Tamam
-                </button>
-            </div>
-        </div>
-    </div>
+    <!-- BAŞARI MODALI (POP-UP) KALDIRILDI -->
+    <!-- Eski pop-up div'i bu kısımdan tamamen kaldırılmıştır. -->
 
     <!-- Footer -->
     <footer class="bg-white py-8">
@@ -433,18 +410,28 @@
         });
 
         // ==========================================================
-        // YENİ FORM GÖNDERİM VE MODAL KONTROL İŞLEVSELLİĞİ
+        // YENİ FORM GÖNDERİM VE DURUM KONTROL İŞLEVSELLİĞİ
         // ==========================================================
         const contactForm = document.getElementById('contact-form');
         const submitButton = document.getElementById('submit-button');
-        const successModal = document.getElementById('success-modal');
-        const errorMessage = document.getElementById('error-message');
+        const statusMessage = document.getElementById('status-message'); // Yeni durum mesajı alanı
 
         // FormData'yı URL kodlu bir string'e dönüştüren yardımcı fonksiyon
         const encode = (data) => {
             return Object.keys(data)
                 .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
                 .join("&");
+        }
+        
+        // Durum mesajını ayarlayan yardımcı fonksiyon
+        function setStatusMessage(message, isSuccess) {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('hidden', 'text-red-400', 'text-green-400');
+            statusMessage.classList.add(isSuccess ? 'text-green-400' : 'text-red-400');
+            // Mesajı 5 saniye sonra gizle
+            setTimeout(() => {
+                statusMessage.classList.add('hidden');
+            }, 5000);
         }
 
         contactForm.addEventListener('submit', function(e) {
@@ -453,20 +440,18 @@
             // Butonu devre dışı bırak ve yükleniyor göster
             submitButton.textContent = 'Gönderiliyor...';
             submitButton.disabled = true;
-            errorMessage.classList.add('hidden');
+            statusMessage.classList.add('hidden');
 
             const data = new FormData(contactForm);
             
-            // Netlify, fetch API kullanılarak gönderilen formları tanımak için 
-            // gizli `form-name` alanının FormData'da bulunmasını ister.
-            const payload = {
-                'form-name': 'contact' // Gizli alanın değerini ekle
-            };
-            
+            const payload = {};
             // FormData'yı normal objeye dönüştür ve payload'a ekle
             for (let pair of data.entries()) {
                 payload[pair[0]] = pair[1];
             }
+            
+            // Netlify'ın ihtiyacı olan `form-name` gizli alanını payload'a ekle (HTML'de de var ama garantilemek için)
+            payload['form-name'] = 'contact'; 
 
             // Form verisini Netlify'a gönder (Same-page AJAX submission)
             fetch("/", {
@@ -475,23 +460,20 @@
                 body: encode(payload)
             })
             .then(response => {
-                // Netlify başarılı form gönderiminde 200 veya 302 döndürür.
+                // Netlify, başarılı AJAX gönderiminde 200 veya 302 (yönlendirmesiz) döndürür.
                 if (response.ok || response.status === 200) {
-                    // Başarılı: Modalı göster
-                    successModal.classList.remove('opacity-0', 'invisible');
-                    successModal.classList.add('opacity-100', 'visible');
-                    
-                    // Formu temizle
+                    // Başarılı: Başarı mesajını göster ve formu temizle
+                    setStatusMessage('E-postanız iletilmiştir, bizi tercih ettiğiniz için teşekkürler.', true);
                     contactForm.reset();
                 } else {
                     // Hata: Hata mesajını göster
-                    errorMessage.classList.remove('hidden');
+                    setStatusMessage('Mesajınız gönderilemedi. Lütfen tekrar deneyin.', false);
                     console.error('Netlify Form Submission Failed:', response);
                 }
             })
             .catch(error => {
                 // Ağ veya diğer hatalar
-                errorMessage.classList.remove('hidden');
+                setStatusMessage('Mesajınız gönderilemedi. Lütfen tekrar deneyin.', false);
                 console.error('Submission Error:', error);
             })
             .finally(() => {
@@ -500,15 +482,6 @@
                 submitButton.disabled = false;
             });
         });
-        
-        // Modalı tıklayarak kapatma işlevi (dışına tıklama)
-        successModal.addEventListener('click', (e) => {
-            if (e.target === successModal) {
-                successModal.classList.remove('opacity-100', 'visible');
-                successModal.classList.add('opacity-0', 'invisible');
-            }
-        });
-
     </script>
 </body>
 </html>
